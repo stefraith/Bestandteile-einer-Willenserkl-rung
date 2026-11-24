@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Was gehört zu einer Willenserklärung?</title>
+<meta name="description" content="Lernkurs: äußerer und innerer Tatbestand einer Willenserklärung, Handlungswille, Erklärungsbewusstsein, Geschäftswille.">
+<style>
+/*
+VOICE: ruhig, klar, schülernah; ein kurzer Kurs in fünf Schritten
+IDEA: ein Eisberg, dessen zwei Teile man selbst beschriftet
+PICTURE: gezeichneter Eisberg mit zwei Ablagefeldern, danach Karten mit klaren Folgen-Farben
+COLOUR and TYPE: Dunkelblau führt, Petrol trägt, warmes Orange als Akzent; Systemschrift
+LAYOUT: eine Spalte bis 860px, Fortschrittsbalken oben, eine Seite pro Schritt mit Zurück und Weiter
+*/
+:root{color-scheme:light dark;
+  --bg:light-dark(#F6F9FB,#0E1822);--card:light-dark(#FFFFFF,#16222F);--ink:light-dark(#1C2731,#E7EEF4);
+  --muted:light-dark(#5B6B78,#A3B3C1);--navy:light-dark(#173A5E,#A9CBEF);--petrol:light-dark(#0E7C86,#5FC4CC);
+  --petrol-soft:light-dark(#E3F4F5,#173A3F);--sky:light-dark(#E8F1F8,#1C2E40);--line:light-dark(#DCE6EE,#2A3C4E);
+  --warm:#F0A23B;--warm-soft:light-dark(#FEF3E2,#3A2D18);
+  --no:light-dark(#B9473F,#F09A92);--no-soft:light-dark(#FBE8E6,#3D211E);--yes:light-dark(#2D7A52,#7FD1A3);--yes-soft:light-dark(#E3F3EA,#1B3A2A);
+  --shadow:0 1px 2px rgba(23,58,94,.05),0 8px 26px rgba(23,58,94,.08);--head:#173A5E}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI",Arial,Helvetica,sans-serif;overflow-x:clip}
+h1,h2,h3{color:var(--navy);line-height:1.15;margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,5.5vw,44px);font-weight:800}
+h2{font-size:clamp(26px,4vw,34px);font-weight:800}
+h3{font-size:19px}
+p{margin:0 0 .8em}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+
+/* Kopf mit Fortschritt */
+.top{position:sticky;top:0;z-index:20;background:var(--head);color:#fff}
+.top-in{max-width:860px;margin:0 auto;padding:12px 16px 14px}
+.top-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;margin-bottom:8px}
+.top-row b{font-size:15px}
+.pct{font-weight:800;color:var(--warm);font-size:16px;white-space:nowrap}
+.track{height:10px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden}
+.bar{height:100%;width:0;background:var(--warm);border-radius:99px;transition:width .6s ease}
+.dots{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+.dots::-webkit-scrollbar{display:none}
+.dot{flex:none;font-size:13px;color:#C9D8E6;padding:4px 10px;border-radius:99px;border:1px solid rgba(255,255,255,.2);background:none;white-space:nowrap}
+.dot.cur{background:#fff;color:#173A5E;border-color:#fff;font-weight:700}
+.dot.done::before{content:"✓ ";color:var(--warm)}
+.dot.cur.done::before{color:var(--yes)}
+
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 40px}
+.page{display:none}
+.page.on{display:block;animation:in .35s ease}
+.kicker{display:inline-block;font-size:14px;font-weight:700;color:var(--petrol);background:var(--petrol-soft);padding:4px 12px;border-radius:99px;margin-bottom:12px}
+.lead{font-size:clamp(18px,2.4vw,20px)}
+.def{background:var(--sky);border-radius:18px;padding:18px 20px;margin:16px 0}
+.def b{color:var(--navy)}
+.task{display:flex;gap:10px;align-items:flex-start;background:var(--warm-soft);border-radius:14px;padding:12px 16px;margin:0 0 14px;font-weight:600}
+
+/* Eisberg mit Ablagefeldern */
+.berg{background:var(--card);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.fig{position:relative;width:min(100%,62vh);margin:0 auto;aspect-ratio:16/11}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.zone{position:absolute;transform:translate(-50%,-50%);width:42%;min-height:54px;border:3px dashed #7AA6C2;border-radius:16px;background:rgba(255,255,255,.65);display:grid;place-items:center;text-align:center;padding:6px 10px;font-size:14px;color:#3D5A73;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.zone.hot{border-color:var(--warm);background:rgba(254,243,226,.95);transform:translate(-50%,-50%) scale(1.04)}
+.zone.filled{border-style:solid;border-color:#173A5E;background:#173A5E;color:#fff;font-weight:700}
+.zone.wrong{animation:shake .4s ease;border-color:var(--no)}
+#z-top{left:50%;top:27%}
+#z-deep{left:50%;top:58%}
+.elements{position:absolute;left:50%;top:80%;transform:translate(-50%,-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:70%;opacity:0;transition:opacity .6s ease}
+.elements.show{opacity:1}
+.elements span{background:#fff;color:#173A5E;border:2px solid #173A5E;border-radius:99px;padding:3px 10px;font-size:13px;font-weight:700;white-space:nowrap}
+.tray{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:14px 16px;border-bottom:1px solid var(--line);min-height:84px;align-items:center;background:var(--sky)}
+.drag{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;border:0;border-radius:14px;padding:12px 18px;font-weight:800;min-height:52px;background:var(--warm);color:#173A5E;box-shadow:0 4px 12px rgba(240,162,59,.35)}
+.drag small{display:block;font-weight:600;font-size:12px}
+.drag.sel{outline:3px solid var(--navy);outline-offset:2px}
+.drag.ghost{position:fixed;z-index:50;pointer-events:none;transform:translate(-50%,-50%) rotate(-2deg);cursor:grabbing}
+.drag.used{display:none}
+.tray-note{width:100%;text-align:center;color:var(--muted);font-size:14px;margin:0}
+.berg-fb{margin:0;padding:12px 18px 16px;border-top:1px solid var(--line);font-weight:600;min-height:1.6em}
+.berg-fb.ok{color:var(--yes)}.berg-fb.bad{color:var(--no)}
+@keyframes shake{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(-53%,-50%)}75%{transform:translate(-47%,-50%)}}
+
+/* Seite 2 */
+.rule{display:flex;gap:14px;align-items:flex-start;background:var(--navy);color:#fff;border-radius:18px;padding:16px 18px;margin:18px 0}
+.rule .ico{flex:none;width:38px;height:38px;border-radius:12px;background:var(--warm);color:#173A5E;display:grid;place-items:center;font-weight:800}
+.rule p{margin:0}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.way{text-align:left;border:2px solid transparent;background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:6px;min-height:170px;transition:border-color .2s ease,transform .2s ease}
+.way:hover{transform:translateY(-2px);border-color:var(--line)}
+.w-ico{width:44px;height:44px;border-radius:14px;background:var(--petrol-soft);color:var(--petrol);display:grid;place-items:center}
+.w-ico svg{width:24px;height:24px}
+.way b{color:var(--navy);font-size:18px}
+.way small{color:var(--muted);font-size:14px}
+.way .more{display:none;font-size:15px;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.way.open{border-color:var(--petrol)}
+.way.open .more{display:block;animation:in .3s ease}
+.way.open .tap{display:none}
+.tap{margin-top:auto;font-size:13px;font-weight:700;color:var(--petrol)}
+.way.silent .w-ico{background:var(--no-soft);color:var(--no)}
+.way.silent.open{border-color:var(--no)}
+.exc{display:block;margin-top:8px;background:var(--warm-soft);border-radius:10px;padding:8px 10px;font-size:14px}
+.stop{display:flex;gap:12px;align-items:flex-start;background:var(--no-soft);border-radius:16px;padding:14px 16px;margin-top:14px}
+.stop b{color:var(--no)}
+
+/* Seite 3 */
+.elems{display:grid;gap:14px;margin-top:18px}
+.elem{background:var(--card);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 230px}
+.e-main{padding:20px 22px}
+.e-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.num{flex:none;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center}
+.e-def{font-weight:600;margin-bottom:10px}
+.e-ex{background:var(--sky);border-radius:14px;padding:12px 14px;font-size:15px}
+.e-ex b{color:var(--navy)}
+.e-ex p{margin:0}
+.e-fol{padding:20px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.e-fol small{font-size:13px;font-weight:700}
+.e-fol strong{font-size:19px;line-height:1.2}
+.e-fol span{font-size:14px;color:var(--ink)}
+.e-fol.no{background:var(--no-soft);color:var(--no)}
+.e-fol.yes{background:var(--yes-soft);color:var(--yes)}
+.dispute{display:inline-block;font-size:12px;font-weight:700;background:var(--warm-soft);color:#9A5B0C;border-radius:99px;padding:2px 10px;margin-left:4px}
+
+/* Seite 4: Lena */
+.lena{display:grid;grid-template-columns:290px minmax(0,1fr);gap:18px;align-items:start;margin-top:18px}
+.phone{background:#1E1E1E;border-radius:28px;padding:10px;box-shadow:var(--shadow);position:sticky;top:150px}
+.ph-head{display:flex;gap:10px;align-items:center;background:#075E54;color:#fff;border-radius:20px 20px 0 0;padding:10px 12px;font-size:15px}
+.ph-head small{display:block;font-size:12px;opacity:.8}
+.av{width:34px;height:34px;border-radius:50%;background:#128C7E;display:grid;place-items:center;font-weight:700;font-size:13px}
+.ph-body{background:#ECE5DD;border-radius:0 0 20px 20px;padding:14px 12px 22px;display:flex;flex-direction:column;gap:8px;min-height:200px}
+.msg{max-width:86%;padding:8px 10px 4px;border-radius:12px;font-size:15px;color:#111B21;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.msg.in{background:#fff}.msg.out{background:#DCF8C6;align-self:flex-end;font-size:32px;line-height:1.1}
+.msg time{display:block;text-align:right;font-size:11px;color:#667781}
+.thought{align-self:flex-end;font-size:13px;font-style:italic;color:#54656F;background:#fff;border-radius:12px;padding:6px 10px}
+.grp{font-size:14px;font-weight:800;color:var(--petrol);margin:6px 0 2px}
+.grp-box{background:var(--sky);border-radius:20px;padding:10px;display:grid;gap:10px}
+.checks{display:grid;gap:10px}
+.chk{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px;min-height:56px}
+.chk .box{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid var(--line);display:grid;place-items:center;font-weight:800;color:transparent;transition:all .25s ease}
+.chk b{color:var(--navy)}
+.chk .why{display:none;font-size:15px;margin-top:4px}
+.chk .q{font-size:13px;color:var(--muted)}
+.chk.done .why{display:block;animation:in .3s ease}
+.chk.done.ok{border-color:var(--yes)}
+.chk.done.ok .box{background:var(--yes);border-color:var(--yes);color:#fff}
+.chk.done.miss{border-color:var(--warm)}
+.chk.done.miss .box{background:var(--warm);border-color:var(--warm);color:#173A5E}
+.verdict{display:none;background:var(--navy);color:#fff;border-radius:16px;padding:16px 18px;font-weight:700}
+.verdict.show{display:block;animation:in .4s ease}
+
+/* Seite 5: Quiz */
+.quiz{display:grid;gap:14px;margin-top:18px}
+.qq{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:20px}
+.qn{font-size:13px;font-weight:700;color:var(--petrol)}
+.qt{font-weight:700;color:var(--navy);margin:4px 0 12px}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:12px;border:2px solid var(--line);background:var(--card);min-height:48px;transition:border-color .15s ease,background .15s ease}
+.opt:hover:not(:disabled){border-color:var(--petrol);background:var(--petrol-soft)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--yes);background:var(--yes-soft)}
+.opt.wrong{border-color:var(--no);background:var(--no-soft)}
+.fb{padding:12px 14px;border-radius:12px;font-size:15px;animation:in .25s ease}
+.fb.ok{background:var(--yes-soft)}.fb.bad{background:var(--no-soft)}
+.match{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.match:last-of-type{border-bottom:0}
+.match select{font:inherit;font-size:16px;padding:10px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);width:100%;min-height:46px}
+.match.right select{border-color:var(--yes);background:var(--yes-soft)}
+.match.wrong select{border-color:var(--no);background:var(--no-soft)}
+.btn-s{border:0;border-radius:12px;background:var(--navy);color:#fff;font-weight:700;padding:12px 18px;min-height:48px;margin-top:10px}
+.link{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:14px;padding:8px 0;min-height:40px}
+.sum{display:grid;gap:10px;margin-top:18px}
+.row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.row .l{padding:14px 18px;display:flex;flex-direction:column;justify-content:center}
+.row .l b{color:var(--navy)}
+.row .l small{color:var(--muted);font-size:14px}
+.row .r{padding:14px 18px;font-weight:700;display:flex;align-items:center}
+.row .r.no{background:var(--no-soft);color:var(--no)}
+.row .r.yes{background:var(--yes-soft);color:var(--yes)}
+.key{background:var(--navy);color:#fff;border-radius:20px;padding:20px 22px;margin-top:16px}
+.key p{margin:0}
+.finish{display:none;text-align:center;background:var(--yes-soft);border-radius:20px;padding:22px;margin-top:16px}
+.finish.show{display:block;animation:in .4s ease}
+.finish b{color:var(--yes);font-size:22px;display:block}
+
+/* Navigation */
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:28px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:12px 22px;font-weight:800;min-height:52px}
+.btn.next{background:var(--navy);color:#fff;margin-left:auto}
+.btn.next:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
+.btn.back{background:var(--sky);color:var(--navy)}
+.lock{width:100%;text-align:right;font-size:14px;color:var(--muted);margin:0}
+
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:760px){
+  .ways{grid-template-columns:1fr}
+  .way{min-height:0}
+  .elem{grid-template-columns:1fr}
+  .lena{grid-template-columns:1fr}
+  .phone{position:static;max-width:320px}
+  .match{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .fig{aspect-ratio:1/1;width:min(100%,58vh)}
+  .zone{width:62%;font-size:13px}
+  .elements{width:86%}
+  .pager .btn{flex:1}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="top-row"><b>Was gehört zu einer Willenserklärung?</b><span class="pct" id="pct">0 % erledigt</span></div>
+    <div class="track" role="progressbar" aria-label="Kursfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="track"><div class="bar" id="bar"></div></div>
+    <nav class="dots" id="dots" aria-label="Kursschritte"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1 Start -->
+  <section class="page" data-title="Eisberg">
+    <span class="kicker">Schritt 1 von 5</span>
+    <h1>Was gehört zu einer Willenserklärung?</h1>
+    <div class="def"><p class="lead" style="margin:0">Eine <b>Willenserklärung</b> ist die Äußerung einer Person, mit der sie einen bestimmten rechtlichen Erfolg erreichen will, zum Beispiel einen Kaufvertrag. Ohne Willenserklärung gibt es kein Rechtsgeschäft: keinen Vertrag, keine Kündigung, kein Testament.</p></div>
+    <p>Eine Willenserklärung ist wie ein <b>Eisberg</b>. Ein Teil ist für alle sichtbar, ein Teil liegt verborgen unter Wasser.</p>
+    <p class="task"><span aria-hidden="true">✋</span><span>Ziehen Sie die beiden Begriffe an die richtige Stelle im Eisberg. Sie können einen Begriff auch antippen und dann auf das Feld tippen.</span></p>
+    <div class="berg">
+      <div class="tray top-tray" id="tray">
+        <button class="drag" type="button" data-key="innen">Das Gewollte<small>innerer Tatbestand</small></button>
+        <button class="drag" type="button" data-key="aussen">Das Erklärte<small>äußerer Tatbestand</small></button>
+      </div>
+      <div class="fig" id="fig">
+        <svg viewBox="0 0 800 550" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CFE6EC"/><stop offset="1" stop-color="#7FB8C3"/></linearGradient>
+            <linearGradient id="ice" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E4F0F7"/></linearGradient>
+            <linearGradient id="ice2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF5F8"/><stop offset="1" stop-color="#BFDCE5"/></linearGradient>
+          </defs>
+          <rect width="800" height="550" fill="#F3F8FB"/>
+          <circle cx="690" cy="70" r="34" fill="#FFE2A8"/>
+          <rect y="215" width="800" height="335" fill="url(#sea)"/>
+          <path d="M0 215 Q20 207 40 215 T80 215 T120 215 T160 215 T200 215 T240 215 T280 215 T320 215 T360 215 T400 215 T440 215 T480 215 T520 215 T560 215 T600 215 T640 215 T680 215 T720 215 T760 215 T800 215" fill="none" stroke="#6FAEBA" stroke-width="3"/>
+          <path d="M190 215 L280 95 L395 40 L505 80 L615 215 Z" fill="url(#ice)" stroke="#173A5E" stroke-width="2.5"/>
+          <path d="M395 40 L418 120 L505 80" fill="none" stroke="#B9D3E3" stroke-width="2"/>
+          <path d="M190 215 L615 215 L665 345 L610 490 L420 540 L230 495 L150 350 Z" fill="url(#ice2)" stroke="#173A5E" stroke-width="2.5" stroke-opacity=".6"/>
+          <text x="24" y="200" font-size="15" font-weight="700" fill="#0E7C86">Wasseroberfläche</text>
+          <g font-size="14" font-weight="700"><text x="640" y="150" fill="#9A5B0C">sichtbar</text><text x="680" y="300" fill="#fff">unsichtbar</text></g>
+        </svg>
+        <div class="zone" id="z-top" data-accept="aussen">Hier ablegen</div>
+        <div class="zone" id="z-deep" data-accept="innen">Hier ablegen</div>
+        <div class="elements" id="elements"><span>1 Handlungswille</span><span>2 Erklärungsbewusstsein</span><span>3 Geschäftswille</span></div>
+      </div>
+      <p class="berg-fb" id="berg-fb" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 2 Äußerer Tatbestand -->
+  <section class="page" data-title="Äußerer Tatbestand">
+    <span class="kicker">Schritt 2 von 5</span>
+    <h2>Der äußere Tatbestand: das Erklärte</h2>
+    <p style="margin-top:12px">Hier geht es um das, was andere von außen sehen oder hören können.</p>
+    <div class="rule"><span class="ico">§</span><p><b>Entscheidend ist:</b> Wie darf ein vernünftiger Mensch an Stelle des Empfängers das Verhalten verstehen? (§§ 133, 157 BGB)</p></div>
+    <p style="font-weight:600">Tippen Sie auf die Karten.</p>
+    <div class="ways">
+      <button class="way" type="button" aria-expanded="false">
+        <span class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.7A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+        <b>Ausdrücklich</b><small>mit Worten, mündlich oder schriftlich</small>
+        <span class="more"><b style="font-size:15px">Beispiel:</b> „Ich nehme Ihr Angebot an.“</span>
+        <span class="tap">Beispiel ansehen</span>
+      </button>
+      <button class="way" type="button" aria-expanded="false">
+        <span class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11.5V4a1.5 1.5 0 0 1 3 0v7.5"/><path d="M14 11.5V6a1.5 1.5 0 0 1 3 0v8a7 7 0 0 1-7 7h-.5a6 6 0 0 1-5-2.7L3 15.5a1.6 1.6 0 0 1 2.6-1.8L8 16"/></svg></span>
+        <b>Schlüssiges Verhalten</b><small>auch „konkludent“: ohne Worte, durch Handeln</small>
+        <span class="more"><b style="font-size:15px">Beispiel:</b> Sie legen an der Kasse eine Packung Kaffee auf das Band. Jeder versteht: Sie wollen kaufen.</span>
+        <span class="tap">Beispiel ansehen</span>
+      </button>
+      <button class="way silent" type="button" aria-expanded="false">
+        <span class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9 8l6 6M15 8l-6 6"/></svg></span>
+        <b>Schweigen</b><small>grundsätzlich keine Willenserklärung</small>
+        <span class="more">Wer schweigt, erklärt grundsätzlich nichts. Schweigen ist keine Willenserklärung.
+          <span class="exc"><b>Aber:</b> Es gibt Ausnahmen. Zum Beispiel, wenn die Beteiligten vorher vereinbart haben, dass Schweigen als Zustimmung gilt, oder in bestimmten Fällen unter Kaufleuten.</span></span>
+        <span class="tap">Mehr erfahren</span>
+      </button>
+    </div>
+    <div class="stop"><span aria-hidden="true">✗</span><p style="margin:0"><b>Fehlt der äußere Tatbestand, gibt es keine Willenserklärung.</b> Wer nur denkt „Das kaufe ich“, aber nichts sagt oder tut, hat nichts erklärt.</p></div>
+  </section>
+
+  <!-- 3 Innerer Tatbestand -->
+  <section class="page" data-title="Innerer Tatbestand">
+    <span class="kicker">Schritt 3 von 5</span>
+    <h2>Der innere Tatbestand: das Gewollte</h2>
+    <p style="margin-top:12px">Der innere Tatbestand hat drei Elemente. Achten Sie besonders auf die farbigen Felder: <b>Was passiert, wenn das Element fehlt?</b></p>
+    <div class="elems">
+      <article class="elem">
+        <div class="e-main">
+          <div class="e-head"><span class="num">1</span><h3>Handlungswille</h3></div>
+          <p class="e-def">Die Person handelt bewusst und gewollt.</p>
+          <div class="e-ex"><b>Beispiel:</b><p>Bei einer Versteigerung wird Max von einer Wespe gestochen. Vor Schreck reißt er den Arm hoch. Der Auktionator hält das für ein Gebot.</p></div>
+        </div>
+        <div class="e-fol no"><small>Fehlt der Handlungswille:</small><strong>keine Willenserklärung</strong><span>Ein Reflex, eine Bewegung im Schlaf oder unter Hypnose ist keine gewollte Handlung. Max muss nichts kaufen.</span></div>
+      </article>
+      <article class="elem">
+        <div class="e-main">
+          <div class="e-head"><span class="num">2</span><h3>Erklärungsbewusstsein</h3></div>
+          <p class="e-def">Die Person weiß, dass ihr Verhalten eine rechtlich bedeutsame Erklärung sein kann, mit der sie sich bindet.</p>
+          <div class="e-ex"><b>Beispiel:</b><p>Herr Weber betritt einen Saal, in dem Wein versteigert wird. Er winkt einem Freund zu. Bei einer Versteigerung heißt Handheben aber: „Ich biete mehr.“ Herr Weber bekommt den Zuschlag, obwohl er nur grüßen wollte.</p></div>
+        </div>
+        <div class="e-fol yes"><small>Fehlt das Erklärungsbewusstsein: <span class="dispute">umstritten</span></small><strong>nach herrschender Meinung trotzdem eine Willenserklärung</strong><span>wenn die Person bei normaler Aufmerksamkeit hätte erkennen können, dass ihr Verhalten so verstanden wird. Sie kann die Erklärung aber anfechten.</span></div>
+      </article>
+      <article class="elem">
+        <div class="e-main">
+          <div class="e-head"><span class="num">3</span><h3>Geschäftswille</h3></div>
+          <p class="e-def">Die Person will ein ganz bestimmtes Geschäft mit genau diesem Inhalt abschließen.</p>
+          <div class="e-ex"><b>Beispiel:</b><p>Kim will im Onlineshop eine schwarze Hose bestellen. Sie vertippt sich bei der Artikelnummer und bestellt eine grüne. Kim wollte bestellen, also ist das Erklärungsbewusstsein da. Die grüne Hose wollte sie aber nicht.</p></div>
+        </div>
+        <div class="e-fol yes"><small>Fehlt der Geschäftswille:</small><strong>trotzdem eine Willenserklärung</strong><span>Kim kann sie aber wegen Irrtums anfechten (§ 119 Abs. 1 BGB).</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4 Lena -->
+  <section class="page" data-title="Fall Lena">
+    <span class="kicker">Schritt 4 von 5</span>
+    <h2>Der Fall Lena</h2>
+    <p style="margin-top:12px">Lena schickt Herrn Kraus bewusst einen Daumen nach oben. Herr Kraus versteht das als Zustimmung zu seiner Frage. Lena wollte eigentlich nur zeigen, dass sie die Nachricht gelesen hat.</p>
+    <p class="task"><span aria-hidden="true">👆</span><span>Prüfen Sie den Fall: Tippen Sie nacheinander auf jede Zeile.</span></p>
+    <div class="lena">
+      <div class="phone">
+        <div class="ph-head"><span class="av">HK</span><div><b>Herr Kraus</b><small>MedBedarf Oberpfalz</small></div></div>
+        <div class="ph-body">
+          <div class="msg in">Soll ich 20 Packungen Handschuhe für 89 Euro verbindlich bestellen?<time>21:14</time></div>
+          <div class="msg out">👍<time>21:16 ✓✓</time></div>
+          <div class="thought">Lena denkt: „Hab's gelesen.“</div>
+        </div>
+      </div>
+      <div class="checks">
+        <div class="grp">Äußerer Tatbestand</div>
+        <button class="chk" type="button" data-r="ok"><span class="box">✓</span><span><span class="q">Ist von außen ein Wille erkennbar?</span><br><b>Äußerer Tatbestand</b><span class="why">Liegt vor. Auf die Frage „Soll ich verbindlich bestellen?“ darf ein vernünftiger Empfänger einen Daumen als „Ja“ verstehen.</span></span></button>
+        <div class="grp">Innerer Tatbestand</div>
+        <div class="grp-box">
+          <button class="chk" type="button" data-r="ok"><span class="box">✓</span><span><span class="q">Hat Lena bewusst gehandelt?</span><br><b>Handlungswille</b><span class="why">Liegt vor. Lena hat den Daumen bewusst getippt und abgeschickt. Das war kein Reflex.</span></span></button>
+          <button class="chk" type="button" data-r="ok"><span class="box">✓</span><span><span class="q">Wusste Lena, dass ihr Daumen rechtlich zählt?</span><br><b>Erklärungsbewusstsein</b><span class="why">Liegt nach herrschender Meinung vor. Selbst wenn Lena nur „gelesen“ meinte: Sie hätte erkennen können, dass ihr Daumen als Zustimmung verstanden wird.</span></span></button>
+          <button class="chk" type="button" data-r="miss"><span class="box">!</span><span><span class="q">Wollte Lena genau diese Bestellung?</span><br><b>Geschäftswille</b><span class="why">Fehlt. Lena wollte die Handschuhe eigentlich nicht bestellen. Das ändert aber nichts: Auch ohne Geschäftswille liegt eine Willenserklärung vor.</span></span></button>
+        </div>
+        <div class="verdict" id="verdict">Ergebnis: Lenas Daumen ist eine Willenserklärung. Dass sie nur „gelesen“ meinte, hilft ihr nicht.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Check -->
+  <section class="page" data-title="Check">
+    <span class="kicker">Schritt 5 von 5</span>
+    <h2>Haben Sie es verstanden?</h2>
+    <p style="margin-top:12px">Beantworten Sie die vier Fragen. Sie sehen sofort, ob Ihre Antwort stimmt.</p>
+    <div class="quiz" id="quiz"></div>
+    <div class="finish" id="finish"><b>Geschafft! 100 %</b>Sie haben den Kurs abgeschlossen.</div>
+    <h3 style="margin-top:34px;font-size:24px">Auf einen Blick: Was passiert, wenn etwas fehlt?</h3>
+    <div class="sum">
+      <div class="row"><div class="l"><b>Äußerer Tatbestand fehlt</b><small>Von außen ist kein Wille erkennbar.</small></div><div class="r no">✗ keine Willenserklärung</div></div>
+      <div class="row"><div class="l"><b>Handlungswille fehlt</b><small>z. B. Reflex, Schlaf, Hypnose</small></div><div class="r no">✗ keine Willenserklärung</div></div>
+      <div class="row"><div class="l"><b>Erklärungsbewusstsein fehlt</b><small>Person hätte es aber erkennen können (herrschende Meinung)</small></div><div class="r yes">✓ Willenserklärung, aber anfechtbar</div></div>
+      <div class="row"><div class="l"><b>Geschäftswille fehlt</b><small>z. B. vertippt bei der Bestellung</small></div><div class="r yes">✓ Willenserklärung, bei Irrtum anfechtbar (§ 119 Abs. 1 BGB)</div></div>
+    </div>
+    <div class="key"><p><b>Die zentrale Erkenntnis:</b> Fehlen der äußere Tatbestand oder der Handlungswille, gibt es gar keine Willenserklärung. Fehlen Erklärungsbewusstsein oder Geschäftswille, liegt in der Regel trotzdem eine Willenserklärung vor. Man kann sie aber anfechten.</p></div>
+  </section>
+
+  <nav class="pager">
+    <button class="btn back" id="back" type="button">← Zurück</button>
+    <button class="btn next" id="next" type="button">Weiter →</button>
+    <p class="lock" id="lock"></p>
+  </nav>
+</main>
+
+<script>
+{
+  const pages = [...document.querySelectorAll(".page")];
+  const N = pages.length;
+  const KEY = "we-tatbestand-kurs-v1";
+  let st = { done: [], cur: 0 };
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && Array.isArray(s.done)) st = { done: s.done, cur: +s.cur || 0 }; } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+  const isDone = i => st.done.includes(i);
+  const markDone = i => { if (!isDone(i)) { st.done.push(i); save(); } progress(); };
+
+  const bar = document.getElementById("bar"), pct = document.getElementById("pct"), track = document.getElementById("track");
+  const dots = document.getElementById("dots");
+  function progress() {
+    const p = Math.round(st.done.length / N * 100);
+    bar.style.width = p + "%"; pct.textContent = p + " % erledigt"; track.setAttribute("aria-valuenow", p);
+    dots.innerHTML = pages.map((pg, i) => `<button class="dot ${i === st.cur ? "cur" : ""} ${isDone(i) ? "done" : ""}" type="button" data-i="${i}" ${canGo(i) ? "" : "disabled"}>${i + 1}. ${pg.dataset.title}</button>`).join("");
+  }
+  const canGo = i => i === 0 || isDone(i - 1) || isDone(i);
+  dots.addEventListener("click", e => { const d = e.target.closest(".dot"); if (d && !d.disabled) show(+d.dataset.i); });
+
+  const back = document.getElementById("back"), next = document.getElementById("next"), lock = document.getElementById("lock");
+  // Seiten, die erst nach einer Aufgabe weitergehen
+  const gate = { 0: () => bergDone, 3: () => lenaDone() };
+  const gateText = { 0: "Legen Sie zuerst beide Begriffe in den Eisberg.", 3: "Tippen Sie zuerst alle vier Zeilen an." };
+  function updateNext() {
+    const i = st.cur;
+    if (i === N - 1) { next.style.display = "none"; lock.textContent = ""; return; }
+    next.style.display = "";
+    const ok = gate[i] ? gate[i]() : true;
+    next.disabled = !ok; lock.textContent = ok ? "" : gateText[i];
+  }
+  function show(i) {
+    st.cur = Math.max(0, Math.min(N - 1, i)); save();
+    pages.forEach((p, k) => p.classList.toggle("on", k === st.cur));
+    back.style.visibility = st.cur === 0 ? "hidden" : "visible";
+    updateNext(); progress(); window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  back.addEventListener("click", () => show(st.cur - 1));
+  next.addEventListener("click", () => { if (next.disabled) return; markDone(st.cur); show(st.cur + 1); });
+
+  /* ---------- Schritt 1: Eisberg ---------- */
+  let bergDone = false;
+  const fb = document.getElementById("berg-fb"), elements = document.getElementById("elements");
+  const zones = [...document.querySelectorAll(".zone")];
+  let selected = null;
+  function place(chip, zone) {
+    if (zone.dataset.accept !== chip.dataset.key) {
+      zone.classList.remove("wrong"); void zone.offsetWidth; zone.classList.add("wrong");
+      fb.className = "berg-fb bad";
+      fb.textContent = chip.dataset.key === "aussen" ? "Nicht ganz. Das Erklärte kann jeder sehen. Wo ist der sichtbare Teil?" : "Nicht ganz. Das Gewollte liegt im Kopf, also unsichtbar. Wo ist der verborgene Teil?";
+      return;
+    }
+    zone.classList.add("filled"); zone.innerHTML = chip.innerHTML; zone.dataset.filled = "1";
+    chip.classList.add("used"); chip.classList.remove("sel"); selected = null;
+    if (chip.dataset.key === "innen") elements.classList.add("show");
+    fb.className = "berg-fb ok";
+    fb.textContent = chip.dataset.key === "aussen" ? "Richtig! Das Erklärte ist der sichtbare Teil: das, was jemand sagt, schreibt oder tut." : "Richtig! Das Gewollte liegt unter Wasser: das, was die Person wirklich will. Es besteht aus drei Elementen.";
+    if (zones.every(z => z.dataset.filled)) {
+      bergDone = true; markDone(0); updateNext();
+      document.getElementById("tray").style.display = "none";
+      fb.textContent = "Super! Eine Willenserklärung besteht aus dem äußeren Tatbestand (das Erklärte) und dem inneren Tatbestand (das Gewollte).";
+    }
+  }
+  const zoneAt = (x, y) => zones.find(z => { if (z.dataset.filled) return false; const r = z.getBoundingClientRect(); return x >= r.left - 12 && x <= r.right + 12 && y >= r.top - 12 && y <= r.bottom + 12; });
+  document.querySelectorAll(".drag").forEach(chip => {
+    let ghost = null, sx = 0, sy = 0, moved = false, dragged = false;
+    chip.addEventListener("pointerdown", e => { sx = e.clientX; sy = e.clientY; moved = false; chip.setPointerCapture(e.pointerId); });
+    chip.addEventListener("pointermove", e => {
+      if (!chip.hasPointerCapture(e.pointerId)) return;
+      if (!moved && Math.hypot(e.clientX - sx, e.clientY - sy) < 6) return;
+      if (!moved) { moved = true; ghost = chip.cloneNode(true); ghost.classList.add("ghost"); document.body.appendChild(ghost); chip.style.opacity = ".35"; }
+      ghost.style.left = e.clientX + "px"; ghost.style.top = e.clientY + "px";
+      zones.forEach(z => z.classList.toggle("hot", z === zoneAt(e.clientX, e.clientY)));
+    });
+    const end = e => {
+      if (!moved) return;
+      const z = zoneAt(e.clientX, e.clientY);
+      ghost.remove(); ghost = null; chip.style.opacity = ""; zones.forEach(x => x.classList.remove("hot"));
+      if (z) place(chip, z);
+      moved = false; dragged = true; setTimeout(() => dragged = false, 50);
+    };
+    chip.addEventListener("pointerup", end);
+    chip.addEventListener("pointercancel", end);
+    chip.addEventListener("click", () => {
+      if (moved || dragged) return;
+      document.querySelectorAll(".drag").forEach(c => c.classList.toggle("sel", c === chip && !c.classList.contains("sel")));
+      selected = chip.classList.contains("sel") ? chip : null;
+      if (selected) { fb.className = "berg-fb"; fb.textContent = "Tippen Sie jetzt auf das passende Feld im Eisberg."; }
+    });
+  });
+  zones.forEach(z => z.addEventListener("click", () => { if (selected && !z.dataset.filled) place(selected, z); }));
+  if (isDone(0)) { // bereits gelöst: Endzustand zeigen
+    document.querySelectorAll(".drag").forEach(c => place(c, zones.find(z => z.dataset.accept === c.dataset.key)));
+  }
+
+  /* ---------- Schritt 2: Karten ---------- */
+  document.querySelectorAll(".way").forEach(w => w.addEventListener("click", () => { const o = w.classList.toggle("open"); w.setAttribute("aria-expanded", o); }));
+
+  /* ---------- Schritt 4: Lena ---------- */
+  const chks = [...document.querySelectorAll(".chk")];
+  const lenaDone = () => chks.every(c => c.classList.contains("done"));
+  chks.forEach(c => c.addEventListener("click", () => {
+    c.classList.add("done", c.dataset.r);
+    if (lenaDone()) { document.getElementById("verdict").classList.add("show"); markDone(3); updateNext(); }
+  }));
+  if (isDone(3)) chks.forEach(c => c.click());
+
+  /* ---------- Schritt 5: Quiz ---------- */
+  const Q = [
+    { t: "mc", q: "Max wird bei einer Versteigerung von einer Wespe gestochen und reißt den Arm hoch. Liegt eine Willenserklärung vor?",
+      o: ["Ja, er hat den Arm gehoben.", "Nein, der Handlungswille fehlt.", "Ja, aber er kann sie anfechten."], a: 1,
+      e: "Ein Reflex ist keine gewollte Handlung. Ohne Handlungswille gibt es keine Willenserklärung." },
+    { t: "match", q: "Ordnen Sie zu: Wie wird hier der Wille nach außen gezeigt?",
+      items: [["„Ich nehme Ihr Angebot an.“", 0], ["Kaffee an der Kasse auf das Band legen", 1], ["Auf ein Angebot gar nicht reagieren", 2]],
+      forms: ["Ausdrücklich", "Schlüssiges Verhalten", "Schweigen: grundsätzlich keine Willenserklärung"],
+      e: "Worte sind eine ausdrückliche Erklärung. Handeln ohne Worte ist schlüssiges Verhalten. Schweigen ist grundsätzlich keine Willenserklärung." },
+    { t: "mc", q: "Kim bestellt aus Versehen eine grüne statt einer schwarzen Hose. Was gilt?",
+      o: ["Es gibt keine Willenserklärung.", "Es gibt eine Willenserklärung. Kim kann sie wegen Irrtums anfechten.", "Kim muss die Hose auf jeden Fall behalten."], a: 1,
+      e: "Fehlt nur der Geschäftswille, liegt trotzdem eine Willenserklärung vor. Kim kann sie nach § 119 Abs. 1 BGB anfechten." },
+    { t: "mc", q: "Herr Weber winkt bei einer Weinversteigerung einem Freund zu. Was gilt nach der herrschenden Meinung?",
+      o: ["Keine Willenserklärung, er wollte nur grüßen.", "Eine Willenserklärung, wenn er hätte erkennen können, dass Winken als Gebot gilt. Er kann anfechten.", "Eine Willenserklärung, die er nicht mehr beseitigen kann."], a: 1,
+      e: "Fehlt nur das Erklärungsbewusstsein, liegt nach herrschender Meinung trotzdem eine Willenserklärung vor, wenn er es bei normaler Aufmerksamkeit hätte erkennen können. Er kann sie anfechten." }
+  ];
+  const answered = new Set();
+  const qbox = document.getElementById("quiz");
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const checkQuiz = () => { if (answered.size === Q.length) { markDone(4); document.getElementById("finish").classList.add("show"); } };
+  function render(i) {
+    const q = Q[i], d = document.createElement("div");
+    d.className = "qq";
+    d.innerHTML = `<div class="qn">Frage ${i + 1} von ${Q.length}</div><div class="qt">${esc(q.q)}</div>`;
+    const fbk = ok => {
+      answered.add(i); checkQuiz();
+      d.insertAdjacentHTML("beforeend", `<div class="fb ${ok ? "ok" : "bad"}"><b>${ok ? "Richtig!" : "Nicht ganz."}</b> ${esc(q.e)}</div><button class="link" type="button">Nochmal versuchen</button>`);
+      d.querySelector(".link").addEventListener("click", () => d.replaceWith(render(i)));
+    };
+    if (q.t === "mc") {
+      q.o.forEach((o, k) => d.insertAdjacentHTML("beforeend", `<button class="opt" type="button" data-k="${k}">${esc(o)}</button>`));
+      d.addEventListener("click", e => {
+        const b = e.target.closest(".opt"); if (!b || b.disabled) return;
+        const pick = +b.dataset.k;
+        d.querySelectorAll(".opt").forEach((x, k) => { x.disabled = true; if (k === q.a) x.classList.add("right"); else if (k === pick) x.classList.add("wrong"); });
+        fbk(pick === q.a);
+      });
+    } else {
+      q.items.forEach(([txt]) => d.insertAdjacentHTML("beforeend", `<div class="match"><span>${esc(txt)}</span><select aria-label="${esc(txt)}"><option value="">Bitte wählen …</option>${q.forms.map((f, k) => `<option value="${k}">${esc(f)}</option>`).join("")}</select></div>`));
+      d.insertAdjacentHTML("beforeend", `<button class="btn-s" type="button">Prüfen</button>`);
+      const btn = d.querySelector(".btn-s");
+      btn.addEventListener("click", () => {
+        const sel = [...d.querySelectorAll("select")];
+        if (sel.some(s => s.value === "")) { btn.textContent = "Bitte zuerst alles zuordnen"; setTimeout(() => btn.textContent = "Prüfen", 1600); return; }
+        let ok = 0;
+        d.querySelectorAll(".match").forEach((m, k) => { const r = String(q.items[k][1]) === sel[k].value; if (r) ok++; m.classList.add(r ? "right" : "wrong"); sel[k].disabled = true; });
+        btn.remove(); fbk(ok === q.items.length);
+      });
+    }
+    return d;
+  }
+  Q.forEach((_, i) => qbox.appendChild(render(i)));
+  if (isDone(4)) document.getElementById("finish").classList.add("show");
+
+  show(canGo(st.cur) ? st.cur : 0);
+}
+</script>
+</body>
+</html>
